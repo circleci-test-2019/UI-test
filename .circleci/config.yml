@@ -1,16 +1,67 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/android:api-26-alpha
-    steps:
-      - run:
-          name: Setup emulator
-          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "yes" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
-      - run:
-          name: Launch emulator
-          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
-          background: true
-      - run:
-          name: Run Tests
-          command: ./gradlew :demo:connectedAndroidTest
+# version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: circleci/android:api-26-alpha
+#     steps:
+#       - run:
+#           name: Setup emulator
+#           command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "yes" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+#       - run:
+#           name: Launch emulator
+#           command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+#           background: true
+#       - run:
+#           name: Run Tests
+#           command: ./gradlew :demo:connectedAndroidTest
+
+
+machine:
+    java:
+    #Because buildtools 24.0.2 and above require Java 1.8 or above
+    version: oraclejdk8
+  environment:
+    #Necessary for the Android SDKs to function properly. Also useful for booting up the emulator in later steps
+    ANDROID_HOME: /home/ubuntu/android
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+    TEST_FLAGS: "--configure-on-demand -PdisablePreDex"
+    ADB_INSTALL_TIMEOUT: "10"
+
+#Install android build tools, platforms (upported versions here https://circleci.com/docs/android)
+dependencies:
+  pre:
+    - chmod +x gradlew
+    - ./gradlew --foreground:
+        background: true
+    - until (./gradlew --status | grep -q IDLE); do echo "Waiting for Gradle daemon..."; done
+  cache_directories:
+    - ~/.android
+    - ~/android
+  override:
+    - (source scripts/environmentSetup.sh && getAndroidSDK) #wat?
+
+#Pull any submodules
+checkout:
+  post:
+    - git submodule init
+    - git submodule update
+    - cp local.properties.ci local.properties
+
+#-PdisablePreDex is a must else gradle just dies due to memory limit
+test:
+  override:
+    - ./gradlew assembleDebug -PdisablePreDex
+    - emulator -avd circleci-android24 -no-audio -no-window:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    # unlock the emulator screen
+    - sleep 30
+    - adb shell input keyevent 82
+    # run tests  against the emulator.
+    - ./gradlew connectedProductionDebugAndroidTest -PdisablePreDex
+    # copy the build outputs to artifacts
+    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
