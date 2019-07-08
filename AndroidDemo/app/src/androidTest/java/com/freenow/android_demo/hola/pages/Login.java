@@ -37,9 +37,9 @@ public class Login {
                 .perform(click());
     }
 
-    public void waitForErrorMessage() {
+    public void waitForErrorMessage(int time) {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

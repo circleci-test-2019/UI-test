@@ -39,7 +39,7 @@ public class LoginActivityTests {
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
         loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
     @Test
@@ -47,16 +47,16 @@ public class LoginActivityTests {
         loginPage.enterUserName(correctUsername);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.waitForErrorMessage(2000);
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
     @Test
     public void shouldDisplayLoginFailed_LoginWithEmptyCredentials() {
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.waitForErrorMessage(1000);
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
 
     }
 
@@ -66,8 +66,8 @@ public class LoginActivityTests {
         loginPage.enterPassword(correctPassword);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.waitForErrorMessage(2000);
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
     @Test
@@ -76,8 +76,8 @@ public class LoginActivityTests {
         loginPage.enterPassword(incorrectPassword);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.waitForErrorMessage(2000);
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
     @Test
@@ -86,8 +86,8 @@ public class LoginActivityTests {
         loginPage.enterPassword(incorrectPassword);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
-//        loginPage.checkLoginFailedErrorMessageIsDisplayed();
+        loginPage.waitForErrorMessage(2000);
+        loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
     @Test
