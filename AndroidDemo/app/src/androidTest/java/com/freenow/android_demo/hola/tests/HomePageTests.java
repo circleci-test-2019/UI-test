@@ -25,8 +25,11 @@ import static org.hamcrest.CoreMatchers.not;
 
 public class HomePageTests {
     private MainPage mainPage = new MainPage();
+    private Login loginPage = new Login();
     private DriverProfile driverProfile = new DriverProfile();
     private String searchKeyword = TestDataUtils.getInstance().getSearchKeyword();
+    private String correctUsername = TestDataUtils.getInstance().getCorrectUsername();
+    private String correctPassword = TestDataUtils.getInstance().getCorrectPassword();
     private String driverName = TestDataUtils.getInstance().getDriverName();
 
     @Rule
@@ -41,9 +44,6 @@ public class HomePageTests {
                     "android.permission.ACCESS_FINE_LOCATION");
     @Before
     public void init(){
-        Login loginPage = new Login();
-        String correctUsername = TestDataUtils.getInstance().getCorrectUsername();
-        String correctPassword = TestDataUtils.getInstance().getCorrectPassword();
         loginPage.loginWithValidCredentials(correctUsername, correctPassword);
     }
 
