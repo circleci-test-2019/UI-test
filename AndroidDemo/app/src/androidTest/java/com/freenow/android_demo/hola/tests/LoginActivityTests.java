@@ -96,7 +96,7 @@ public class LoginActivityTests {
         loginPage.enterPassword(correctPassword);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        MainPage.checkAppNameExist();
+//        MainPage.checkAppNameExist();
     }
 
 }
