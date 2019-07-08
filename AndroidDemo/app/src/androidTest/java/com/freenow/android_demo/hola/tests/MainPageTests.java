@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
-public class HomePageTests {
+public class MainPageTests {
     private MainPage mainPage = new MainPage();
     private Login loginPage = new Login();
     private DriverProfile driverProfile = new DriverProfile();
@@ -46,8 +46,9 @@ public class HomePageTests {
     @Test
     public void shouldDisplayDriverProfile_searchAndSelectDriverName() {
         loginPage.loginWithValidCredentials(correctUsername, correctPassword);
-        mainPage.enterSearchText(searchKeyword);
         MainPage.checkAppNameExist();
+        mainPage.enterSearchText(searchKeyword);
+
 //        mainPage.selectSearchResult(driverName);
 //        driverProfile.checkDriverNameExist(driverName);
 //        driverProfile.clickDialButton();
