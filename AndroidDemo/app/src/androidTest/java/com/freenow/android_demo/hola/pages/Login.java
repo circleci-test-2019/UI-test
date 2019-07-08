@@ -39,7 +39,7 @@ public class Login {
 
     public void waitForErrorMessage() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
