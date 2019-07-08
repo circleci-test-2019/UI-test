@@ -1,33 +1,3 @@
-# version: 2
-# jobs:
-#   build:
-#     docker:
-#       - image: circleci/android:api-26-alpha
-#     steps:
-#       - run:
-#           name: Setup emulator
-#           command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "yes" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
-      
-#       - run:
-#           name: Launch emulator
-#           command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
-#           background: true
-#       - run:
-#           name: Run Tests
-#           command: ./gradlew :demo:connectedAndroidTest
-
-
-
-#   # environment:
-#   #   #Necessary for the Android SDKs to function properly. Also useful for booting up the emulator in later steps
-#   #   ANDROID_HOME: /home/ubuntu/android
-#   #   GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-#   #   TEST_FLAGS: "--configure-on-demand -PdisablePreDex"
-#   #   ADB_INSTALL_TIMEOUT: "10"
-
-
-
-
 version: 2
 jobs:
   build:
