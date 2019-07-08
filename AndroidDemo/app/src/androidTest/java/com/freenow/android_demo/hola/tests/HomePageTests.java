@@ -50,10 +50,9 @@ public class HomePageTests {
 
     @Test
     public void shouldDisplayDriverProfile_searchAndSelectDriverName() {
-        loginPage.enterUserName(correctUsername);
-        loginPage.enterPassword(correctPassword);
-        loginPage.checkLoginButtonExist();
-        loginPage.clickLoginButton();
-        MainPage.checkAppNameExist();
+        mainPage.enterSearchText(searchKeyword);
+        mainPage.selectSearchResult(driverName);
+        driverProfile.checkDriverNameExist(driverName);
+        driverProfile.clickDialButton();
     }
 }
