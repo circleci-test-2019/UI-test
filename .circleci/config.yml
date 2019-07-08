@@ -43,11 +43,11 @@ jobs:
       #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
          name: Chmod permissions
-        #  command: sudo chmod +x ./gradlew
-         command: ls AndroidDemo
+         command: sudo chmod +x ./gradlew
+        #  command: ls AndroidDemo
       - run:
           name: Download Dependencies
-          command: AndroidDemo/gradlew androidDependencies
+          command: AndroidDemo/gradlew tasks
       - save_cache:
           paths:
             - ~/.gradle
