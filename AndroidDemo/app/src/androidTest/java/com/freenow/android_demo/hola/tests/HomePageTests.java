@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
-public class MainActivityTests {
+public class HomePageTests {
     private MainPage mainPage = new MainPage();
     private DriverProfile driverProfile = new DriverProfile();
     private String searchKeyword = TestDataUtils.getInstance().getSearchKeyword();
