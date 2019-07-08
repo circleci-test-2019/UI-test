@@ -9,19 +9,18 @@ jobs:
     steps:
       - checkout:
           path: ~/code/UI-test/AndroidDemo/
-      # - restore_cache:
-      #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
          name: Chmod permissions
          command: sudo chmod +x AndroidDemo/gradlew
-        #  command: ls AndroidDemo
       - run:
           name: Download Dependencies
           command: AndroidDemo/gradlew tasks
-      # - save_cache:
-      #     paths:
-      #       - ~/.gradle
-      #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Lists installed targets
           command: android list target
