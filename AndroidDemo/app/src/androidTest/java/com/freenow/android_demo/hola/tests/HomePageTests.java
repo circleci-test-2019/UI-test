@@ -42,15 +42,12 @@ public class HomePageTests {
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION");
-    @Before
-    public void init(){
-        loginPage.loginWithValidCredentials(correctUsername, correctPassword);
-    }
-
 
     @Test
     public void shouldDisplayDriverProfile_searchAndSelectDriverName() {
+        loginPage.loginWithValidCredentials(correctUsername, correctPassword);
         mainPage.enterSearchText(searchKeyword);
+        MainPage.checkAppNameExist();
 //        mainPage.selectSearchResult(driverName);
 //        driverProfile.checkDriverNameExist(driverName);
 //        driverProfile.clickDialButton();
