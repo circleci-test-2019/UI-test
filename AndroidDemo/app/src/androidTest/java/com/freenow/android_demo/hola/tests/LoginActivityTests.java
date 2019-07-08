@@ -38,7 +38,7 @@ public class LoginActivityTests {
         loginPage.enterPassword(correctPassword);
         loginPage.checkLoginButtonExist();
         loginPage.clickLoginButton();
-        loginPage.waitForErrorMessage();
+        loginPage.waitForErrorMessage(2000);
         loginPage.checkLoginFailedErrorMessageIsDisplayed();
     }
 
