@@ -8,7 +8,7 @@ import com.freenow.android_demo.activities.DriverProfileActivity;
 import com.freenow.android_demo.activities.MainActivity;
 import com.freenow.android_demo.hola.pages.DriverProfile;
 import com.freenow.android_demo.hola.pages.Login;
-import com.freenow.android_demo.hola.pages.MainPage;
+import com.freenow.android_demo.hola.pages.HomePage;
 import com.freenow.android_demo.hola.utilities.TestDataUtils;
 
 import org.junit.Before;
