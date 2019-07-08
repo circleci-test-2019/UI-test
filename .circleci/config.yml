@@ -61,8 +61,11 @@ jobs:
           name: Show list of system-images
           command: sdkmanager --list --verbose | grep system-images
       - run:
+          name: Accept licenses
+          command: yes | sdkmanager --licenses || true
+      - run:
           name: Setup Emulator
-          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | sdkmanager --licenses | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
+          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" |  avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
       - run:
           name: Launch Emulator
           command: |
