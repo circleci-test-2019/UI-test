@@ -73,14 +73,14 @@ jobs:
                   export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
                   emulator -avd test -no-window -noaudio -no-boot-anim -no-window -accel on
           background: true
-      - run:
-          name: Wait emulator
-          command: |
-              circle-android wait-for-boot
-              adb shell input keyevent 82
+      # - run:
+      #     name: Wait emulator
+      #     command: |
+      #         circle-android wait-for-boot
+      #         adb shell input keyevent 82
       - run:
           name: Run Espresso UI Tests
-          working_directory: ~/code/UI-test/AndroidDemo/
+          # working_directory: ~/code/UI-test/AndroidDemo/
           command: ls
           # command: ./gradlew :app:connectedDebugAndroidTest
       - store_artifacts:
