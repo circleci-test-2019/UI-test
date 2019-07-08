@@ -32,29 +32,28 @@ public class MainActivityTests {
     @Rule
     public ActivityTestRule<MainActivity> MainActivityTestRule = new ActivityTestRule<>(
             MainActivity.class);
-//    @Rule
-//    public ActivityTestRule<DriverProfileActivity> ProfileActivityTestRule = new ActivityTestRule<>(
-//            DriverProfileActivity.class);
+    @Rule
+    public ActivityTestRule<DriverProfileActivity> ProfileActivityTestRule = new ActivityTestRule<>(
+            DriverProfileActivity.class, true, false);
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
                     "android.permission.ACCESS_FINE_LOCATION");
     @Before
-//    public void init(){
-//        Login loginPage = new Login();
-//        String correctUsername = TestDataUtils.getInstance().getCorrectUsername();
-//        String correctPassword = TestDataUtils.getInstance().getCorrectPassword();
-//        loginPage.loginWithValidCredentials(correctUsername, correctPassword);
-//    }
+    public void init(){
+        Login loginPage = new Login();
+        String correctUsername = TestDataUtils.getInstance().getCorrectUsername();
+        String correctPassword = TestDataUtils.getInstance().getCorrectPassword();
+        loginPage.loginWithValidCredentials(correctUsername, correctPassword);
+    }
 
 
     @Test
     public void shouldDisplayDriverProfile_searchAndSelectDriverName() {
-        mainPage.enterSearchText(searchKeyword);
-        onView(withText("Sarah Scott")) .inRoot(withDecorView(not(MainActivityTestRule.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed())) .perform(click());
-
-//        mainPage.selectSearchResult(driverName);
-        driverProfile.checkDriverNameExist(driverName);
-        driverProfile.clickDialButton();
+        loginPage.enterUserName(correctUsername);
+        loginPage.enterPassword(correctPassword);
+        loginPage.checkLoginButtonExist();
+        loginPage.clickLoginButton();
+        MainPage.checkAppNameExist();
     }
 }
